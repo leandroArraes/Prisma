@@ -1,0 +1,16 @@
+Inciair projeto em prisma
+npm install prisma typescript ts-node tsx @types/node --save-dev
+
+iniciar o typestripet
+npx tsc --init
+
+linha de comandos do prisma 
+npx prisma 
+
+npx prisma init 
+
+apos criar as tabelas models e toda vez que eu fizer uma alteração na model 
+npx prisma migrate dev --name
+
+npx prisma studio 
+abre o banco da dados e a possibilidade de ver e alterar dados 
