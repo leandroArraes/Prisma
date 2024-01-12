@@ -108,28 +108,35 @@ async function main() {
 
 }
 
-async function apagarUsusario(ids: string){
-    await prisma.post.deleteMany({
-        where:{
-            authorId: ids
-        }
-    })
-
-    await prisma.profile.delete({
-        where:{
-            userId: ids
-        }
-    })
-
-    await prisma.user.delete({
+async function apagarUsuario(ids: string) {
+    try {
+      // Excluir posts relacionados
+      await prisma.post.deleteMany({
         where: {
-          id: ids
-        }
+          authorId: ids,
+        },
       });
-
-    console.log("Usuaio deletado")
-};
-
+  
+      // Excluir perfil relacionado
+      await prisma.profile.delete({
+        where: {
+          userId: ids,
+        },
+      });
+  
+      // Excluir usuário
+      await prisma.user.delete({
+        where: {
+          id: ids,
+        },
+      });
+  
+      console.log("Usuário deletado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao deletar usuário:", error);
+      // Tratar o erro, por exemplo, enviando uma notificação ou registrando no log
+    }
+  }
 
 main().then(async(e)=>{
     await prisma.$disconnect();
